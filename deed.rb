@@ -152,24 +152,37 @@ class Deed < Sinatra::Base
     year, month, day = $1.to_i, MONTH_NAMES[$2.to_i - 1], $3.to_i
 
     pdf.formatted_text_box([ 
-                           { :text => "\n\n\n\nBY THIS DEED OF CHANGE OF NAME", :font => 'Bold' },
-                           { :text => ' made by myself the undersigned ' },
-                           { :text => params[:nn].strip, :font => 'Bold' },
-                           { :text => " of #{params[:a].strip}, #{params[:t].strip} in the County of #{params[:c]} formerly known as " },
-                           { :text => params[:on].strip, :font => 'Bold' },
-                           { :text => ", a British Citizen under section #{clause} of the British Nationality Act 1981" },
-                           { :text => "\n\nHEREBY DECLARE AS FOLLOWS:", :font => 'Bold' },
-                           { :text => "\n\nI.    I ABSOLUTELY", :font => 'Bold' },
-                           { :text => " and entirely renounce, relinquish and abandon the use of my said former name #{params[:on].strip} and assume, adopt and determine to take and use from the date hereof the name of #{params[:nn].strip} in substitution for my former name of #{params[:on].strip}" },
-                           { :text => "\n\nII.   I SHALL AT ALL TIMES", :font => 'Bold' },
-                           { :text => " hereafter in all records, deeds documents and other writings and in all actions and proceedings as well as in all dealings and transactions and on all occasions whatsoever use and subscribe the said name of #{params[:nn].strip} as my name, in substitution for my former name of #{params[:on].strip} so relinquished as aforesaid to the intent that I may hereafter be called known or distinguished not by the former name of #{params[:on].strip} but by the name #{params[:nn].strip}" },
-                           { :text => "\n\nIII.  I AUTHORISE AND REQUIRE", :font => 'Bold' },
-                           { :text => " all persons at all times to designate, describe, and address me by the adopted name of #{params[:nn].strip}" },
-                           { :text => "\n\nIN WITNESS", :font => 'Bold' },
-                           { :text => " whereof I have hereunto subscribed my adopted and substituted name of #{params[:nn].strip} and also my said former name of #{params[:on].strip}." },
-                           { :text => (params[:cfn] == '1' ? "\n\nNotwithstanding the decision of Mr Justice Vaisey in re Parrott, Cox v Parrott, the applicant wishes the enrolment to proceed." : '')},
-                           { :text => "\n\nSIGNED AS A DEED THIS #{day.ordinalize.upcase} DAY OF #{month.upcase} IN THE YEAR #{year}", :font => 'Bold' },
-                          ], {})
+        { :text => "\n\n\n\nBY THIS DEED OF CHANGE OF NAME", :font => 'Bold' },
+        { :text => " made by myself the undersigned " },
+        { :text => params[:nn].strip, :font => 'Bold' },
+        { :text => " of #{params[:a].strip}, #{params[:t].strip} in the County of #{params[:c]} "\
+                   "formerly known as " },
+        { :text => params[:on].strip, :font => 'Bold' },
+        { :text => ", a British Citizen under section #{clause} of the British Nationality Act 1981" },
+        { :text => "\n\nHEREBY DECLARE AS FOLLOWS:", :font => 'Bold' },
+        { :text => "\n\nI.    I ABSOLUTELY", :font => 'Bold' },
+        { :text => " and entirely renounce, relinquish and abandon the use of my said former name "\
+                   "#{params[:on].strip} and assume, adopt and determine to take and use from the "\
+                   "date hereof the name of #{params[:nn].strip} in substitution for my former name "\
+                   "of #{params[:on].strip}" },
+        { :text => "\n\nII.   I SHALL AT ALL TIMES", :font => 'Bold' },
+        { :text => " hereafter in all records, deeds documents and other writings and in all actions "\
+                   "and proceedings as well as in all dealings and transactions and on all occasions "\
+                   "whatsoever use and subscribe the said name of #{params[:nn].strip} as my name, "\
+                   "in substitution for my former name of #{params[:on].strip} so relinquished as "\
+                   "aforesaid to the intent that I may hereafter be called known or distinguished not "\
+                   "by the former name of #{params[:on].strip} but by the name #{params[:nn].strip}" },
+        { :text => "\n\nIII.  I AUTHORISE AND REQUIRE", :font => 'Bold' },
+        { :text => " all persons at all times to designate, describe, and address me by the adopted "\
+                   "name of #{params[:nn].strip}" },
+        { :text => "\n\nIN WITNESS", :font => 'Bold' },
+        { :text => " whereof I have hereunto subscribed my adopted and substituted name of "\
+                   "#{params[:nn].strip} and also my said former name of #{params[:on].strip}." },
+        { :text => (params[:cfn] == '1' ? "\n\nNotwithstanding the decision of Mr Justice Vaisey in "\
+                   "re Parrott, Cox v Parrott, the applicant wishes the enrolment to proceed." : '')},
+        { :text => "\n\nSIGNED AS A DEED THIS #{day.ordinalize.upcase} DAY OF #{month.upcase} IN THE "\
+                   "YEAR #{year}", :font => 'Bold' },
+        ], {})
 
     wit1str = "#{params[:w1_n].strip}\n#{params[:w1_a].strip}, #{params[:w1_t].strip}"
     wit2str = (witnesses == 2 ? "#{params[:w2_n].strip}\n#{params[:w2_a].strip}, #{params[:w2_t].strip}" : '')
